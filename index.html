@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思科 UCCX/UCCE 话务条解决方案 | 企业级呼叫中心核心组件</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0052CC', // 思科蓝
+                        secondary: '#4A5568',
+                        accent: '#0070D2',
+                        light: '#F7FAFC',
+                        dark: '#1A202C'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa fa-headphones text-primary text-2xl"></i>
+                <span class="text-xl font-bold text-primary">Cisco UCCX Phone Bar</span>
+            </a>
+            
+            <!-- 语言切换 -->
+            <div class="hidden md:flex items-center space-x-6">
+                <button id="lang-zh" class="px-3 py-1 text-primary font-medium border-b-2 border-primary">中文</button>
+                <button id="lang-en" class="px-3 py-1 text-gray-600 font-medium hover:text-primary transition-custom">English</button>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <button id="mobile-lang-zh" class="px-3 py-2 text-primary font-medium border-l-4 border-primary">中文</button>
+                <button id="mobile-lang-en" class="px-3 py-2 text-gray-600 font-medium hover:text-primary transition-custom">English</button>
+                <a href="#features" class="px-3 py-2 text-gray-700 hover:text-primary transition-custom">核心功能</a>
+                <a href="#pricing" class="px-3 py-2 text-gray-700 hover:text-primary transition-custom">价格</a>
+                <a href="#github" class="px-3 py-2 text-gray-700 hover:text-primary transition-custom">源代码</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-r from-primary to-accent text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="zh text-4xl md:text-5xl font-bold mb-6 text-shadow">
+                    思科 UCCX/UCCE 话务条解决方案
+                </h1>
+                <h1 class="en hidden text-4xl md:text-5xl font-bold mb-6 text-shadow">
+                    Cisco UCCX/UCCE Phone Bar Solution
+                </h1>
+                
+                <p class="zh text-lg md:text-xl mb-8 opacity-90">
+                    企业级呼叫中心核心组件，对接思科UCCX/UCCE系统，打造专业客服与工单管理体系
+                </p>
+                <p class="en hidden text-lg md:text-xl mb-8 opacity-90">
+                    Enterprise-level call center core component, integrated with Cisco UCCX/UCCE systems, build professional customer service and ticket management system
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#pricing" class="bg-white text-primary font-medium px-8 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition-custom">
+                        <span class="zh">查看价格</span>
+                        <span class="en hidden">View Pricing</span>
+                    </a>
+                    <a href="#github" class="bg-transparent border-2 border-white text-white font-medium px-8 py-3 rounded-lg hover:bg-white/10 transition-custom">
+                        <span class="zh">获取源代码</span>
+                        <span class="en hidden">Get Source Code</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品介绍 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="zh text-3xl font-bold text-center mb-12 text-dark">
+                    产品介绍
+                </h2>
+                <h2 class="en hidden text-3xl font-bold text-center mb-12 text-dark">
+                    Product Introduction
+                </h2>
+                
+                <div class="zh bg-light p-8 rounded-xl shadow-sm mb-8">
+                    <p class="text-lg text-gray-700 mb-4">
+                        我们的思科 UCCX/UCCE 话务条是专为企业级呼叫中心打造的核心解决方案，能够无缝对接思科 UCCX/UCCE 系统，实现完整的客服中心功能和工单管理体系。
+                    </p>
+                    <p class="text-lg text-gray-700">
+                        现在我们对外出售该话务条的完整源代码，企业可基于源代码进行二次开发、定制化修改，完全掌控核心功能，满足不同行业的个性化需求。
+                    </p>
+                </div>
+                
+                <div class="en hidden bg-light p-8 rounded-xl shadow-sm mb-8">
+                    <p class="text-lg text-gray-700 mb-4">
+                        Our Cisco UCCX/UCCE Phone Bar is a core solution built for enterprise-level call centers, which can seamlessly integrate with Cisco UCCX/UCCE systems to achieve complete customer service center functions and ticket management systems.
+                    </p>
+                    <p class="text-lg text-gray-700">
+                        Now we sell the complete source code of this phone bar to the outside world. Enterprises can carry out secondary development and customized modifications based on the source code, fully control core functions, and meet the personalized needs of different industries.
+                    </p>
+                </div>
+                
+                <!-- 核心优势 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <!-- 优势1 -->
+                    <div class="bg-light p-6 rounded-lg hover:shadow-md transition-custom">
+                        <i class="fa fa-plug text-primary text-3xl mb-4"></i>
+                        <h3 class="zh text-xl font-semibold mb-2">无缝对接</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Seamless Integration</h3>
+                        <p class="zh text-gray-600">完美适配思科 UCCX/UCCE 系统，即接即用</p>
+                        <p class="en hidden text-gray-600">Perfectly compatible with Cisco UCCX/UCCE systems, ready to use</p>
+                    </div>
+                    
+                    <!-- 优势2 -->
+                    <div class="bg-light p-6 rounded-lg hover:shadow-md transition-custom">
+                        <i class="fa fa-code text-primary text-3xl mb-4"></i>
+                        <h3 class="zh text-xl font-semibold mb-2">源码开放</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Open Source Code</h3>
+                        <p class="zh text-gray-600">提供完整源代码，支持深度定制开发</p>
+                        <p class="en hidden text-gray-600">Provide complete source code, support in-depth custom development</p>
+                    </div>
+                    
+                    <!-- 优势3 -->
+                    <div class="bg-light p-6 rounded-lg hover:shadow-md transition-custom">
+                        <i class="fa fa-shield text-primary text-3xl mb-4"></i>
+                        <h3 class="zh text-xl font-semibold mb-2">企业级稳定</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Enterprise Stability</h3>
+                        <p class="zh text-gray-600">经过大规模场景验证，稳定可靠</p>
+                        <p class="en hidden text-gray-600">Verified by large-scale scenarios, stable and reliable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="zh text-3xl font-bold text-center mb-12 text-dark">
+                核心功能
+            </h2>
+            <h2 class="en hidden text-3xl font-bold text-center mb-12 text-dark">
+                Core Features
+            </h2>
+            
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 功能1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <i class="fa fa-phone text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="zh text-xl font-semibold mb-2">呼叫中心基础功能</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Call Center Basic Functions</h3>
+                        <p class="zh text-gray-600">支持来电弹屏、呼叫转移、挂机、保持、静音等全套话务功能</p>
+                        <p class="en hidden text-gray-600">Support full set of telephony functions such as caller ID pop-up, call transfer, hang up, hold, mute, etc.</p>
+                    </div>
+                </div>
+                
+                <!-- 功能2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <i class="fa fa-ticket text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="zh text-xl font-semibold mb-2">工单系统集成</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Ticket System Integration</h3>
+                        <p class="zh text-gray-600">无缝对接工单系统，实现通话与工单的联动管理</p>
+                        <p class="en hidden text-gray-600">Seamlessly integrate with ticket systems to achieve linked management of calls and tickets</p>
+                    </div>
+                </div>
+                
+                <!-- 功能3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <i class="fa fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="zh text-xl font-semibold mb-2">客服状态管理</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Agent Status Management</h3>
+                        <p class="zh text-gray-600">支持在线、离线、休息、忙碌等多状态切换与监控</p>
+                        <p class="en hidden text-gray-600">Support multi-status switching and monitoring such as online, offline, break, busy, etc.</p>
+                    </div>
+                </div>
+                
+                <!-- 功能4 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <i class="fa fa-history text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="zh text-xl font-semibold mb-2">通话记录查询</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Call History Query</h3>
+                        <p class="zh text-gray-600">完整记录通话信息，支持多维度查询与统计分析</p>
+                        <p class="en hidden text-gray-600">Complete record of call information, support multi-dimensional query and statistical analysis</p>
+                    </div>
+                </div>
+                
+                <!-- 功能5 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <i class="fa fa-cogs text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="zh text-xl font-semibold mb-2">灵活配置</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Flexible Configuration</h3>
+                        <p class="zh text-gray-600">支持自定义快捷键、界面布局、功能权限等配置项</p>
+                        <p class="en hidden text-gray-600">Support custom shortcuts, interface layout, function permissions and other configuration items</p>
+                    </div>
+                </div>
+                
+                <!-- 功能6 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <i class="fa fa-line-chart text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="zh text-xl font-semibold mb-2">数据统计分析</h3>
+                        <h3 class="en hidden text-xl font-semibold mb-2">Data Statistics & Analysis</h3>
+                        <p class="zh text-gray-600">提供话务量、接通率、通话时长等多维度数据报表</p>
+                        <p class="en hidden text-gray-600">Provide multi-dimensional data reports such as call volume, answer rate, call duration, etc.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 价格 -->
+    <section id="pricing" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="zh text-3xl font-bold text-center mb-12 text-dark">
+                价格方案
+            </h2>
+            <h2 class="en hidden text-3xl font-bold text-center mb-12 text-dark">
+                Pricing Plan
+            </h2>
+            
+            <div class="max-w-2xl mx-auto bg-light rounded-2xl shadow-md overflow-hidden">
+                <div class="p-8 border-b border-gray-200">
+                    <h3 class="zh text-2xl font-bold text-center mb-2">思科 UCCX/UCCE 话务条源代码</h3>
+                    <h3 class="en hidden text-2xl font-bold text-center mb-2">Cisco UCCX/UCCE Phone Bar Source Code</h3>
+                    <div class="text-center">
+                        <span class="text-4xl font-bold text-primary">¥200,000</span>
+                        <span class="en hidden text-4xl font-bold text-primary">¥200,000</span>
+                        <span class="zh text-gray-500 ml-2">/ 永久授权</span>
+                        <span class="en hidden text-gray-500 ml-2">/ Permanent License</span>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <h4 class="zh font-semibold text-lg mb-4">包含内容：</h4>
+                    <h4 class="en hidden font-semibold text-lg mb-4">Included:</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-green-500 mt-1"></i>
+                            <span class="zh">完整的话务条源代码（前后端）</span>
+                            <span class="en hidden">Complete phone bar source code (frontend & backend)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-green-500 mt-1"></i>
+                            <span class="zh">详细的部署文档和使用手册</span>
+                            <span class="en hidden">Detailed deployment documents and user manuals</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-green-500 mt-1"></i>
+                            <span class="zh">3个月技术支持与对接指导</span>
+                            <span class="en hidden">3 months of technical support and integration guidance</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-green-500 mt-1"></i>
+                            <span class="zh">无限制二次开发权限</span>
+                            <span class="en hidden">Unlimited secondary development rights</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-green-500 mt-1"></i>
+                            <span class="zh">终身免费版本更新</span>
+                            <span class="en hidden">Lifetime free version updates</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-8 text-center">
+                        <a href="mailto:leehear@gmail.com" class="inline-block bg-primary text-white font-medium px-8 py-3 rounded-lg shadow-lg hover:bg-primary/90 transition-custom">
+                            <span class="zh">联系我们</span>
+                            <span class="en hidden">Contact Us</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub链接 -->
+    <section id="github" class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="zh text-3xl font-bold mb-6">
+                获取源代码
+            </h2>
+            <h2 class="en hidden text-3xl font-bold mb-6">
+                Get Source Code
+            </h2>
+            
+            <p class="zh mb-8 max-w-2xl mx-auto">
+                访问我们的GitHub仓库，获取思科UCCX/UCCE话务条源代码的详细信息和使用示例
+            </p>
+            <p class="en hidden mb-8 max-w-2xl mx-auto">
+                Visit our GitHub repository to get detailed information and usage examples of the Cisco UCCX/UCCE Phone Bar source code
+            </p>
+            
+            <a href="https://github.com/lixiangyu890601/CiscoUCCX-CiscoUCCE-PhoneBar" target="_blank" class="inline-flex items-center gap-3 bg-gray-800 hover:bg-gray-700 transition-custom px-6 py-3 rounded-lg font-medium">
+                <i class="fa fa-github text-2xl"></i>
+                <span class="zh">GitHub 仓库</span>
+                <span class="en hidden">GitHub Repository</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-400 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="zh mb-2">© 2026 思科 UCCX/UCCE 话务条解决方案 版权所有</p>
+            <p class="en hidden mb-2">© 2026 Cisco UCCX/UCCE Phone Bar Solution. All rights reserved.</p>
+            <p class="text-sm">
+                <a href="mailto:leehear@gmail.com" class="hover:text-white transition-custom">leehear@gmail.com</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 语言切换功能
+        const langZhButtons = document.querySelectorAll('#lang-zh, #mobile-lang-zh');
+        const langEnButtons = document.querySelectorAll('#lang-en, #mobile-lang-en');
+        const zhElements = document.querySelectorAll('.zh');
+        const enElements = document.querySelectorAll('.en');
+        
+        // 切换到中文
+        langZhButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                zhElements.forEach(el => el.classList.remove('hidden'));
+                enElements.forEach(el => el.classList.add('hidden'));
+                
+                // 更新按钮样式
+                langZhButtons.forEach(b => {
+                    b.classList.add('text-primary', 'border-b-2', 'border-primary');
+                    b.classList.remove('text-gray-600');
+                });
+                langEnButtons.forEach(b => {
+                    b.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                    b.classList.add('text-gray-600');
+                });
+                
+                // 移动端按钮样式
+                document.getElementById('mobile-lang-zh')?.classList.add('text-primary', 'border-l-4', 'border-primary');
+                document.getElementById('mobile-lang-zh')?.classList.remove('text-gray-600');
+                document.getElementById('mobile-lang-en')?.classList.remove('text-primary', 'border-l-4', 'border-primary');
+                document.getElementById('mobile-lang-en')?.classList.add('text-gray-600');
+            });
+        });
+        
+        // 切换到英文
+        langEnButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                zhElements.forEach(el => el.classList.add('hidden'));
+                enElements.forEach(el => el.classList.remove('hidden'));
+                
+                // 更新按钮样式
+                langEnButtons.forEach(b => {
+                    b.classList.add('text-primary', 'border-b-2', 'border-primary');
+                    b.classList.remove('text-gray-600');
+                });
+                langZhButtons.forEach(b => {
+                    b.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                    b.classList.add('text-gray-600');
+                });
+                
+                // 移动端按钮样式
+                document.getElementById('mobile-lang-en')?.classList.add('text-primary', 'border-l-4', 'border-primary');
+                document.getElementById('mobile-lang-en')?.classList.remove('text-gray-600');
+                document.getElementById('mobile-lang-zh')?.classList.remove('text-primary', 'border-l-4', 'border-primary');
+                document.getElementById('mobile-lang-zh')?.classList.add('text-gray-600');
+            });
+        });
+        
+        // 移动端菜单切换
+        document.getElementById('menu-btn')?.addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+        // 滚动时导航栏样式变化
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.add('py-3');
+                header.classList.remove('py-2');
+            }
+        });
+    </script>
+</body>
+</html>
